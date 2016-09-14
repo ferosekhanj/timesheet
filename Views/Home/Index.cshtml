@@ -1,0 +1,17 @@
+@model IList<LogEntry>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Login</th>
+        <th>Logout</th>
+    </tr>
+@foreach(var log in Model)
+{
+    <tr>
+        <td>@log.Name</td>
+        <td>@log.StartTime</td>
+        <td>@log.StopTime</td>
+    </tr>
+}    
+</table>
