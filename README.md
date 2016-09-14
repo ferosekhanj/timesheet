@@ -1,0 +1,1 @@
+This is a small server side application for tracking timesheet. Just playing around with ASP.Net Core.
