@@ -51,7 +51,15 @@
       "appsettings.json",
       "web.config"
     ]
-  },  
+  },
+
+  "scripts": {
+    "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
+  },
+
+  "tooling": {
+    "defaultNamespace": "WebApplication"
+  },
 
   "frameworks": {
     "netcoreapp1.0": {
