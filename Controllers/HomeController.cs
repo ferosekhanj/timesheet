@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,12 @@ namespace Timesheet
         {
             var logs = db.logs.ToList();
             return View(logs);
+        }
+
+        [Route("/Home/Error")]
+        public IActionResult Error()
+        {
+            return View();
         }
     }
 }
