@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Timesheet
 {
@@ -28,8 +29,11 @@ namespace Timesheet
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
         }
-        public void Configure(IApplicationBuilder app,IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app,IHostingEnvironment env,ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
+            
             app.UseStatusCodePages();
             if(env.IsDevelopment())
             {
