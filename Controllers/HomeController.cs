@@ -20,9 +20,9 @@ namespace Timesheet
         public IActionResult Index(int id = -1)
         {
             var start = DateTime.Now;
-            var logs = db.logs.ToList();
+            var logs = from l in db.logs select new LogEntryViewModel{data=l};
             logger.LogInformation("Query took {0}",(DateTimeOffset.Now-start).Milliseconds);
-            return View(logs);
+            return View(logs.ToList());
         }
 
         public IActionResult Contact()
