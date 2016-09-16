@@ -1,17 +1,22 @@
 @model IList<LogEntry>
 
-<table class="table">
-    <tr>
-        <th>Name</th>
-        <th>Login</th>
-        <th>Logout</th>
-    </tr>
-@foreach(var log in Model)
-{
-    <tr>
-        <td>@log.Name</td>
-        <td>@log.StartTime</td>
-        <td>@log.StopTime</td>
-    </tr>
-}    
-</table>
+<div class="starter-template">
+<h1>Daily Log</h1>
+    <p class="lead">
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Login</th>
+                <th>Logout</th>
+            </tr>
+            @foreach(var log in Model)
+            {
+                <tr>
+                    <td>@log.Name</td>
+                    <td>@log.StartTime</td>
+                    <td>@log.StopTime</td>
+                </tr>
+            }    
+        </table>
+    </p>
+</div>

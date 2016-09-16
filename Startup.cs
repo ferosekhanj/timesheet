@@ -33,7 +33,7 @@ namespace Timesheet
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            
+
             app.UseStatusCodePages();
             if(env.IsDevelopment())
             {
@@ -45,7 +45,12 @@ namespace Timesheet
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
-            app.UseMvc();
+            app.UseMvc(
+                routes=>{
+                    routes.MapRoute(name:"default",
+                    template: "{controller=Home}/{action=Index}");
+                }
+            );
 
         }
     }

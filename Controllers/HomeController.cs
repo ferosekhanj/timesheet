@@ -17,7 +17,6 @@ namespace Timesheet
             this.logger = logger;
         }
         
-        [HttpGet("/")]
         public IActionResult Index(int id = -1)
         {
             var start = DateTime.Now;
@@ -26,7 +25,16 @@ namespace Timesheet
             return View(logs);
         }
 
-        [Route("/Home/Error")]
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        public IActionResult About()
+        {
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View();
