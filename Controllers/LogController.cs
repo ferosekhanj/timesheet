@@ -15,11 +15,20 @@ public class LogController : Controller
     }
 
 
-    [HttpGet("/Log/{Start:DateTime}/{Stop:DateTime}")]
-    public string Add(DateTime Start,DateTime Stop)
+    [Route("/Log/{Start}/{Stop}")]
+    public ActionResult Add(DateTime Start,DateTime Stop)
     {
+        if(!ModelState.IsValid)
+        {
+            logger.LogError("Receiver invalid input {0}",Request.Path);
+            return new ContentResult{   
+                                        Content     = $"400 Bad request \nUnable to process the log "+ Request.Path,
+                                        ContentType = @"text\plain",
+                                        StatusCode  = 400 
+                                    };
+        }
+        
         logger.LogInformation("Received Start={0},Stop={1}",Start,Stop);
-
         var model = new LogEntry
         {
             Name = "Ferose",
@@ -28,7 +37,7 @@ public class LogController : Controller
         };
         db.logs.Add(model);
         db.SaveChanges();
-        return $"Added {Start} {Stop}";
+        return new ContentResult{ Content=$"Added {Start} {Stop}",ContentType=@"text\plain",StatusCode =200 };
     }
 }
 }
