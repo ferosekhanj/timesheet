@@ -21,13 +21,9 @@ public class LogController : Controller
         if(!ModelState.IsValid)
         {
             logger.LogError("Receiver invalid input {0}",Request.Path);
-            return new ContentResult{   
-                                        Content     = $"400 Bad request \nUnable to process the log "+ Request.Path,
-                                        ContentType = @"text\plain",
-                                        StatusCode  = 400 
-                                    };
+            return BadRequest($"Unable to process the log {Request.Path}"); 
         }
-        
+
         logger.LogInformation("Received Start={0},Stop={1}",Start,Stop);
         var model = new LogEntry
         {
@@ -37,7 +33,7 @@ public class LogController : Controller
         };
         db.logs.Add(model);
         db.SaveChanges();
-        return new ContentResult{ Content=$"Added {Start} {Stop}",ContentType=@"text\plain",StatusCode =200 };
+        return Content("Added {Start} {Stop}");
     }
 }
 }
