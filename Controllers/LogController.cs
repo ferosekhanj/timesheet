@@ -1,8 +1,10 @@
 using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace Timesheet{
+
 public class LogController : Controller
 {
     TimesheetContext db;
@@ -33,7 +35,20 @@ public class LogController : Controller
         };
         db.logs.Add(model);
         db.SaveChanges();
-        return Content("Added {Start} {Stop}");
+        return Content($"Added {Start} {Stop}");
+    }
+
+    public ActionResult Delete(int id=-1)
+    {
+        if(!ModelState.IsValid)
+        {
+            logger.LogError("Receiver invalid input {0}",Request.Path);
+            return BadRequest($"Unable to process the log {Request.Path}"); 
+        }
+        var logToBeDeleted = db.logs.Where(l=>l.Id==id).First(); 
+        db.logs.Remove(logToBeDeleted);
+        db.SaveChanges();
+        return RedirectToAction("Index","Home");
     }
 }
 }
