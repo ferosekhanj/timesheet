@@ -5,7 +5,7 @@
     <p class="lead">
         <table class="table">
             <tr>
-                <th>Name</th>
+                <th>Hours</th>
                 <th>Login</th>
                 <th>Logout</th>
                 <th>Action</th>
@@ -13,10 +13,10 @@
             @foreach(var log in Model)
             {
                 <tr>
-                    <td>@log.Name</td>
+                    <td>@log.TimeSpent</td>
                     <td>@log.StartTime</td>
                     <td>@log.StopTime</td>
-                    <td><button class="btn btn-danger"><a asp-controller="Log" asp-action="Delete" asp-route-id="@log.data.Id">Delete</a></button></td>
+                    <td><a asp-controller="Log" asp-action="Delete" asp-route-id="@log.data.Id">Delete</a></td>
                 </tr>
             }    
         </table>

@@ -20,6 +20,14 @@ namespace Timesheet
         public DateTime StopTime 
         { 
             get { return TimeZoneInfo.ConvertTime(data.StopTime,IST);}  
+        }
+
+        public TimeSpan TimeSpent 
+        { 
+            get
+            {
+                return data.StopTime - data.StartTime;
+            } 
         }        
     }
 } 
