@@ -6,6 +6,11 @@ namespace Timesheet
     {
         TimeZoneInfo IST = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
         
+        public LogEntryViewModel()
+        {
+            data = new LogEntry();
+        }
+
         public LogEntry data{get;set;}
         public int Id 
         { 
@@ -22,7 +27,7 @@ namespace Timesheet
         { 
             get 
             { 
-                return TimeZoneInfo.ConvertTime(data.StartTime,IST);
+                return TimeZoneInfo.ConvertTime(data.StartTime,TimeZoneInfo.Utc,IST);
             }
             set 
             { 
@@ -34,7 +39,7 @@ namespace Timesheet
         { 
             get 
             { 
-                return TimeZoneInfo.ConvertTime(data.StopTime,IST);
+                return TimeZoneInfo.ConvertTime(data.StopTime,TimeZoneInfo.Utc,IST);
             } 
             set 
             { 

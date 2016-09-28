@@ -30,8 +30,8 @@ public class LogController : Controller
         var model = new LogEntry
         {
             Name = "Ferose",
-            StartTime = Start,
-            StopTime = Stop,
+            StartTime = Start.ToUniversalTime(),
+            StopTime = Stop.ToUniversalTime(),
         };
         db.logs.Add(model);
         db.SaveChanges();
@@ -45,11 +45,11 @@ public class LogController : Controller
     }
 
     [HttpPost]
-    public ActionResult Save(LogEntry model)
+    public ActionResult Save(LogEntryViewModel model)
     {
-        db.Update(model);
+        db.Update(model.data);
         db.SaveChanges();
-        return View("Edit",new LogEntryViewModel{ data= model});
+        return View("Edit",model);
     }
 
     public ActionResult Delete(int id=-1)
