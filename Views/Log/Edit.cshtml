@@ -1,0 +1,29 @@
+@model LogEntryViewModel
+
+<div class="starter-template">
+<div class="row">
+  <div class="col-md-3">    
+<h1>Edit Log</h1>
+<form asp-controller="Log" asp-action="Save" method="post">
+<div class="form-group">
+    <label asp-for="Id">Id</label>
+    <input asp-for="Id" class="form-control" readonly />
+</div>
+<div class="form-group">
+    <label asp-for="Name">Name</label>
+    <input asp-for="Name" class="form-control" readonly/>
+</div>
+<div class="form-group">
+    <label asp-for="StartTime">Login</label>
+    <input asp-for="StartTime" class="form-control"/>
+</div>
+<div class="form-group">
+    <label asp-for="StopTime">Logout</label>
+    <input asp-for="StopTime" class="form-control"/>
+</div>
+<div class="form-group">
+    <input type="submit" class="btn btn-default"/>
+</div>
+</form>
+</div>
+</div>

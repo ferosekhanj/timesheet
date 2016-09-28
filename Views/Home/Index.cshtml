@@ -16,7 +16,10 @@
                     <td>@log.TimeSpent</td>
                     <td>@log.StartTime</td>
                     <td>@log.StopTime</td>
-                    <td><a asp-controller="Log" asp-action="Delete" asp-route-id="@log.data.Id">Delete</a></td>
+                    <td>
+                        <a asp-controller="Log" asp-action="Edit" asp-route-id="@log.data.Id" class="btn btn-default" role="button">Edit</a>
+                        <a asp-controller="Log" asp-action="Delete" asp-route-id="@log.data.Id" class="btn btn-danger" role="button">Delete</a>
+                    </td>
                 </tr>
             }    
         </table>

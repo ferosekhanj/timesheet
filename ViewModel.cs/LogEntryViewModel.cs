@@ -7,19 +7,40 @@ namespace Timesheet
         TimeZoneInfo IST = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
         
         public LogEntry data{get;set;}
+        public int Id 
+        { 
+            get { return data.Id;}
+            set { data.Id = value;}  
+        }
 
         public string Name 
         { 
-            get { return data.Name;}  
+            get { return data.Name;}
+            set { data.Name = value;}  
         }
         public DateTime StartTime
         { 
-            get { return TimeZoneInfo.ConvertTime(data.StartTime,IST);}  
+            get 
+            { 
+                return TimeZoneInfo.ConvertTime(data.StartTime,IST);
+            }
+            set 
+            { 
+                data.StartTime = TimeZoneInfo.ConvertTime(value, IST,TimeZoneInfo.Utc);
+            }  
         }
         
         public DateTime StopTime 
         { 
-            get { return TimeZoneInfo.ConvertTime(data.StopTime,IST);}  
+            get 
+            { 
+                return TimeZoneInfo.ConvertTime(data.StopTime,IST);
+            } 
+            set 
+            { 
+                data.StopTime = TimeZoneInfo.ConvertTime(value, IST,TimeZoneInfo.Utc);
+            }  
+             
         }
 
         public TimeSpan TimeSpent 

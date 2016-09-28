@@ -38,6 +38,20 @@ public class LogController : Controller
         return Content($"Added {Start} {Stop}");
     }
 
+    public ActionResult Edit(int id=-1)
+    {
+        var logToBeEdited = db.logs.Where(l=>l.Id==id).First(); 
+        return View(new LogEntryViewModel{ data= logToBeEdited});
+    }
+
+    [HttpPost]
+    public ActionResult Save(LogEntry model)
+    {
+        db.Update(model);
+        db.SaveChanges();
+        return View("Edit",new LogEntryViewModel{ data= model});
+    }
+
     public ActionResult Delete(int id=-1)
     {
         if(!ModelState.IsValid)
