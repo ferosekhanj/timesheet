@@ -1,0 +1,29 @@
+@model IList<LogEntryViewModel>
+
+<div class="starter-template">
+<h1>Daily Log</h1>
+    <p class="lead">
+        <table class="table">
+            <tr>
+                <th>Hours</th>
+                <th>Login</th>
+                <th>Logout</th>
+                <th>Hours</th>
+                <th>Action</th>
+            </tr>
+            @foreach(var log in Model)
+            {
+                <tr>
+                    <td>@log.StartTime.ToString("m")</td>
+                    <td>@log.StartTime.ToString("t")</td>
+                    <td>@log.StopTime.ToString("t")</td>
+                    <td>@log.TimeSpent.ToString("g")</td>
+                    <td>
+                        <a asp-controller="Log" asp-action="Edit" asp-route-id="@log.data.Id" class="btn btn-default" role="button">Edit</a>
+                        <a asp-controller="Log" asp-action="Delete" asp-route-id="@log.data.Id" class="btn btn-danger" role="button">Delete</a>
+                    </td>
+                </tr>
+            }    
+        </table>
+    </p>
+</div>

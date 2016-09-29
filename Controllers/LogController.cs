@@ -16,6 +16,13 @@ public class LogController : Controller
 
     }
 
+    public ActionResult Index()
+    {
+        var start = DateTime.Now;
+        var logs = from l in db.logs select new LogEntryViewModel{data=l};
+        logger.LogInformation("Query took {0}",(DateTimeOffset.Now-start).Milliseconds);
+        return View(logs.ToList());
+    }
 
     [Route("/Log/{Start}/{Stop}")]
     public ActionResult Add(DateTime Start,DateTime Stop)
@@ -49,7 +56,7 @@ public class LogController : Controller
     {
         db.Update(model.data);
         db.SaveChanges();
-        return View("Edit",model);
+        return RedirectToAction("Index",model);
     }
 
     public ActionResult Delete(int id=-1)
@@ -62,7 +69,7 @@ public class LogController : Controller
         var logToBeDeleted = db.logs.Where(l=>l.Id==id).First(); 
         db.logs.Remove(logToBeDeleted);
         db.SaveChanges();
-        return RedirectToAction("Index","Home");
+        return RedirectToAction("Index");
     }
 }
 }
