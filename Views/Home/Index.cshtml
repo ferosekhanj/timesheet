@@ -6,12 +6,13 @@
             @foreach(var log in Model)
             {
                 var width=Math.Round(log.TimeSpent.TotalMinutes/5.25);
+                var progressBarStatus = (width>100.0)?"progress-bar-warning":"progress-bar-info";
                 <div class="row">
                     <div class="col-md-1">@log.StartTime.ToString("dd/MMM")</div>
                     <div class="col-md-1">@log.TimeSpent.ToString("g")</div>
                     <div class="col-md-6">
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: @width.ToString()%;">
+                            <div class="progress-bar @progressBarStatus" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: @width.ToString()%;">
                                 @width.ToString()% 
                             </div>
                         </div>                    
